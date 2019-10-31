@@ -1,16 +1,26 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, View, Text, StyleSheet } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import ShowScreen from '../screens/ShowScreen';
+
+import { w } from '../constants'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
 });
+
+const ForTabsStyle = ({title}) => {
+  return (
+    <View style={styles.tabs}>
+      <Text style={styles.titles}>{title}</Text>
+    </View>
+  )
+}
 
 const HomeStack = createStackNavigator(
   {
@@ -20,17 +30,9 @@ const HomeStack = createStackNavigator(
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+  title: '',
+  tabBarIcon: () => <ForTabsStyle title='TAB 1' />  
+  
 };
 
 HomeStack.path = '';
@@ -43,10 +45,9 @@ const LinksStack = createStackNavigator(
 );
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
+  title: '',
+  tabBarIcon: () => <ForTabsStyle title='TAB 2' />  
+  
 };
 
 LinksStack.path = '';
@@ -59,18 +60,51 @@ const SettingsStack = createStackNavigator(
 );
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
+  title: '',
+  tabBarIcon: () => <ForTabsStyle title='TAB 3' />  
 };
 
 SettingsStack.path = '';
+
+const ShowStack = createStackNavigator(
+  {
+    Show: ShowScreen,
+  },
+  config
+);
+
+ShowStack.navigationOptions = {
+  title: '',
+  tabBarIcon: () => <ForTabsStyle title='TAB 4' />  
+  
+};
+
+HomeStack.path = '';
+
+const styles = StyleSheet.create({
+  tabs: {
+    backgroundColor: "#C4C4C4",
+    height: 60,
+    width: w / 4,
+    marginBottom: -27,
+    paddingBottom: 27,
+    borderColor: '#4F4F4F',
+    borderRightWidth: 0.5,
+    borderLeftWidth: 0.5,
+  },
+  titles: {
+    textAlign: 'center',
+    marginTop: 14,
+    fontFamily: 'Roboto',
+
+  }
+})
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
+  ShowStack,
 });
 
 tabNavigator.path = '';
