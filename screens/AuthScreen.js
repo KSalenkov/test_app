@@ -4,7 +4,7 @@ import { h, w } from '../constants';
 import { createStackNavigator } from 'react-navigation-stack';
 // import { BtnDown } from '../src/btns/BtnDown';
 
-function StartScreen () {
+function AuthScreen () {
     const { container, image, btnBox, btn } = styles;
 
     console.log('test:', this.props);
@@ -14,7 +14,7 @@ function StartScreen () {
         <View style={container}>
             <ImageBackground
                 style={image}
-                source={require('../src/img/image.png')}
+                source={require('../src/img/image2.png')}
                 imageStyle={{opacity:0.5}}
             >
                 <View style={btnBox}>
@@ -22,7 +22,7 @@ function StartScreen () {
                         style={btn}
                         color="#EB5757"
                         title='Start'
-                        onPress={() => this.navigation.navigate('Auth')}
+                        onPress={() => this.navigation.navigate('Main')}
                     />
                 </View>
                 
@@ -62,13 +62,13 @@ const styles = StyleSheet.create({
 })
     
 
-const StartStack = createStackNavigator(
+const AuthStack = createStackNavigator(
     {
-        start: StartScreen,
+        auth: AuthScreen,
     },
     {
         headerMode: 'none',
     }
   );
 
-  export default StartStack;
+  export default AuthStack;
