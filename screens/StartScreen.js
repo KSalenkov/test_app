@@ -1,46 +1,49 @@
 import React, { Component } from 'react';
 import { View, ImageBackground, Button, StyleSheet } from 'react-native';
 import { h, w } from '../constants';
-import { createStackNavigator } from 'react-navigation-stack';
-// import { BtnDown } from '../src/btns/BtnDown';
 
-function StartScreen () {
-    const { container, image, btnBox, btn } = styles;
 
-    console.log('test:', this.props);
+class StartScreen extends Component {
+    render() {
+        const { container, image, btnBox, btn } = styles;
+        return (
+            <View style={container}>
+                <ImageBackground
+                    style={image}
+                    source={require('../src/img/image.png')}
+                    imageStyle={{opacity:0.5}}
+                >
+                    <View style={btnBox}>
+                        <Button
+                            style={btn}
+                            color="#EB5757"
+                            title='Start'
+                            onPress={() => this.props.navigation.navigate('Auth')}
+                        />
 
-    return (
+                        {/* <BtnDown title='Start' onPress={() => this.props.navigation.navigate('auth')} /> */}
 
-        <View style={container}>
-            <ImageBackground
-                style={image}
-                source={require('../src/img/image.png')}
-                imageStyle={{opacity:0.5}}
-            >
-                <View style={btnBox}>
-                    <Button
-                        style={btn}
-                        color="#EB5757"
-                        title='Start'
-                        onPress={() => this.navigation.navigate('Auth')}
-                    />
-                </View>
+
+                    </View>
+                    
+                    
+                    
+                </ImageBackground>
                 
-                {/* <BtnDown title='Start' press={() => this.props.navigation.navigate('AppNavigator')} /> */}
-                
-            </ImageBackground>
-            
-            
-            
-        </View>
-    )
+            </View>
+        )
+    }
+
 }
+
+
+
+
 
 const styles = StyleSheet.create({
     container: {
         height: h,
-        width: w,
-    
+        width: w,    
     },
     image: {
         flex: 1,
@@ -62,13 +65,4 @@ const styles = StyleSheet.create({
 })
     
 
-const StartStack = createStackNavigator(
-    {
-        start: StartScreen,
-    },
-    {
-        headerMode: 'none',
-    }
-  );
-
-  export default StartStack;
+export default StartScreen;

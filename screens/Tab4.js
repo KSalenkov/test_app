@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-export default function ShowScreen() {
+export default function TabFourScreen() {
   return (
     <View style={styles.container}>
      
@@ -10,8 +10,8 @@ export default function ShowScreen() {
   );
 }
 
-ShowScreen.navigationOptions = {
-  header: null,
+TabFourScreen.navigationOptions = {
+  title: 'Name',
 };
 
 const styles = StyleSheet.create({

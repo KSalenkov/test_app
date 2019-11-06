@@ -14,7 +14,6 @@ const BtnDown = ({title, press}) => {
                 style={btn}
                 color="#EB5757"
                 title={title}
-                onPress={press}
             />
         </View>
     )

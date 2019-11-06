@@ -2,10 +2,10 @@ import React from 'react';
 import { Platform, View, Text, StyleSheet } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
-import ShowScreen from '../screens/ShowScreen';
+import TabOneScreen from '../screens/Tab1';
+import TabTwoScreen from '../screens/Tab2';
+import TabThreeScreen from '../screens/Tab3';
+import TabFourScreen from '../screens/Tab4';
 
 import { w } from '../constants'
 
@@ -22,64 +22,64 @@ const ForTabsStyle = ({title}) => {
   )
 }
 
-const HomeStack = createStackNavigator(
+const TabOneStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    Tab1: TabOneScreen,
   },
   config
 );
 
-HomeStack.navigationOptions = {
+TabOneStack.navigationOptions = {
   title: '',
   tabBarIcon: () => <ForTabsStyle title='TAB 1' />  
   
 };
 
-HomeStack.path = '';
+TabOneStack.path = '';
 
-const LinksStack = createStackNavigator(
+const TabTwoStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Tab2: TabTwoScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
+TabTwoStack.navigationOptions = {
   title: '',
   tabBarIcon: () => <ForTabsStyle title='TAB 2' />  
   
 };
 
-LinksStack.path = '';
+TabTwoStack.path = '';
 
-const SettingsStack = createStackNavigator(
+const TabThreeStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Tab3: TabThreeScreen,
   },
   config
 );
 
-SettingsStack.navigationOptions = {
+TabThreeStack.navigationOptions = {
   title: '',
   tabBarIcon: () => <ForTabsStyle title='TAB 3' />  
 };
 
-SettingsStack.path = '';
+TabThreeStack.path = '';
 
-const ShowStack = createStackNavigator(
+const TabFourStack = createStackNavigator(
   {
-    Show: ShowScreen,
+    Tab4: TabFourScreen,
   },
   config
 );
 
-ShowStack.navigationOptions = {
+TabFourStack.navigationOptions = {
   title: '',
   tabBarIcon: () => <ForTabsStyle title='TAB 4' />  
   
 };
 
-HomeStack.path = '';
+TabFourStack.path = '';
 
 const styles = StyleSheet.create({
   tabs: {
@@ -101,10 +101,10 @@ const styles = StyleSheet.create({
 })
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-  ShowStack,
+  TabOneStack,
+  TabTwoStack,
+  TabThreeStack,
+  TabFourStack,
 });
 
 tabNavigator.path = '';

@@ -1,24 +1,13 @@
 import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
-import MainTabNavigator from './MainTabNavigator';
-import StartStack from '../screens/StartScreen';
-import AuthStack from '../screens/AuthScreen';
+import StackNavigator from './Stack';
 
 
-
-const AppNavigator = createAppContainer(
-  createSwitchNavigator(
-    {
-    Start: StartStack,
-    Main: MainTabNavigator,
-    Auth: AuthStack,
-  },
+const AppNavigator = createAppContainer(StackNavigator,
   {
     initialRouteName: 'Start'
-  }
-  
-  )
-)
+  }  
+);
 
 export default AppNavigator;
