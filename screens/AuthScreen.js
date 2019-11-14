@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, TextInput, KeyboardAvoidingView, Button, StyleSheet } from 'react-native';
+import { 
+    View, 
+    TextInput, 
+    KeyboardAvoidingView, 
+    Button, 
+    StyleSheet, 
+    AsyncStorage 
+} from 'react-native';
 import { w } from '../constants';
 
 
@@ -8,41 +15,53 @@ class AuthScreen extends Component {
     constructor(props) {
         super(props);
         this.login = 'User';
-        this.pass = '123123';
+        this.pass = '1';
+        this.params = {},
         this.state = {
             loginTrue: 'false',
             passTrue: 'false',
+            login: '',
         };
-    }    
+    };
+    
     
     render() {
         const { container, inputBox, inputItem, btnBox, btn } = styles;
+
+        const saveValueFunction = () => {
+           
+            if (this.state.login) {
+                AsyncStorage.setItem('login', this.state.login);
+                // this.setState({ login: '' })
+            }
+        };
+
+        const UselessTextInput = function(props) {
+            return (
+                <TextInput
+                    {...props}
+                    style={inputItem}
+                />
+            )
+        };
 
         return (
 
             <KeyboardAvoidingView style={container} behavior="position" enabled>           
                <View style={inputBox}>
-                    <TextInput
-                        style={inputItem} 
-                        placeholder='Login'
+                    <UselessTextInput                      
+                        placeholder='Login'                        
                         onChangeText={(login) => {
-                            if (login == this.login) {
-                                console.log('true', login);
-                                this.state.loginTrue = 'true';
-                                console.log('login', this.loginTrue)
-                            } else {
-                                this.state.loginTrue = 'false';
-                            }
+                            this.state.login = login;
+                            
                         }}
                     />
-                    <TextInput
-                        style={inputItem} 
+                    <UselessTextInput                       
                         placeholder='Password'
+                        secureTextEntry={true}
                         onChangeText={(pass) => {
                             if (pass == this.pass) {
-                                console.log('true', pass);
                                 this.state.passTrue = 'true';
-                                console.log('pass', this.state.passTrue)
                             } else {
                                 this.state.passTrue = 'false';
                             }
@@ -55,18 +74,18 @@ class AuthScreen extends Component {
                         color="#EB5757"
                         title='Sign In'
                         onPress={() => {
-                            if (this.state.loginTrue == 'true' && this.state.passTrue == 'true') {
-                                this.props.navigation.navigate('Tabs');
+                            if (this.state.passTrue == 'true') {
+                                this.props.navigation.navigate('Tabs', this.params);
+                                saveValueFunction();
+                                
                             } else {
                                 this.state.messeg = 'Неправильный логин или пароль';
+                                alert('Неправильный логин или пароль')
                             };
                         }}
                     />
                 </View>   
             </KeyboardAvoidingView>
-
-
-
 
         )
     }
@@ -75,7 +94,7 @@ class AuthScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#828282',
         width: w,
         alignItems: 'center',
         justifyContent: 'flex-end',

@@ -4,10 +4,6 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import StackNavigator from './Stack';
 
 
-const AppNavigator = createAppContainer(StackNavigator,
-  {
-    initialRouteName: 'Start'
-  }  
-);
+const AppNavigator = createAppContainer(StackNavigator);
 
 export default AppNavigator;

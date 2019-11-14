@@ -31,7 +31,7 @@ const TabOneStack = createStackNavigator(
 
 TabOneStack.navigationOptions = {
   title: '',
-  tabBarIcon: () => <ForTabsStyle title='TAB 1' />  
+  tabBarIcon: () => <ForTabsStyle title='TAB 1' />,
   
 };
 
@@ -46,8 +46,7 @@ const TabTwoStack = createStackNavigator(
 
 TabTwoStack.navigationOptions = {
   title: '',
-  tabBarIcon: () => <ForTabsStyle title='TAB 2' />  
-  
+  tabBarIcon: () => <ForTabsStyle title='TAB 2' />
 };
 
 TabTwoStack.path = '';
@@ -60,7 +59,7 @@ const TabThreeStack = createStackNavigator(
 );
 
 TabThreeStack.navigationOptions = {
-  title: '',
+  title: '',  
   tabBarIcon: () => <ForTabsStyle title='TAB 3' />  
 };
 

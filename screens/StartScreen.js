@@ -4,6 +4,15 @@ import { h, w } from '../constants';
 
 
 class StartScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.params = {
+            name: 'Sign In',
+        }
+    }
+    
+    
+    
     render() {
         const { container, image, btnBox, btn } = styles;
         return (
@@ -18,7 +27,7 @@ class StartScreen extends Component {
                             style={btn}
                             color="#EB5757"
                             title='Start'
-                            onPress={() => this.props.navigation.navigate('Auth')}
+                            onPress={() => this.props.navigation.navigate('Auth', this.params)}
                         />
 
                         {/* <BtnDown title='Start' onPress={() => this.props.navigation.navigate('auth')} /> */}
