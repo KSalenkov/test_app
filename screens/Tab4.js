@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { w } from '../constants';
+import { w, h } from '../constants';
 import { LinearGradient } from 'expo-linear-gradient';
 
 class TabFourScreen extends Component {
@@ -12,7 +12,7 @@ class TabFourScreen extends Component {
   }
 
   render() {
-    const { container, gradientStyle, gradientOff, btnBox, btnTouch, titleStyle } = styles;
+    const { container, gradientStyle, gradientOff, btnBox, btnTouchOn, btnTouchOff, titleStyle } = styles;
 
     const HideGradient = () => {
       if (this.state.push) {
@@ -32,13 +32,34 @@ class TabFourScreen extends Component {
       }
     }
 
+    const MyBtn = (props) => {
+      if (this.state.push) {
+        return (
+          <TouchableOpacity
+            {...props}
+            style={btnTouchOn}
+            >
+            <Text style={titleStyle}>Hide</Text>
+          </TouchableOpacity>
+        )
+      } else {
+        return (
+          <TouchableOpacity
+            {...props}
+            style={btnTouchOff}
+            >
+            <Text style={titleStyle}>Show</Text>
+          </TouchableOpacity>
+        )
+      }
+    }
+
     return (
       <View style={container}>
         <HideGradient />
 
         <View style={btnBox}>
-          <TouchableOpacity
-            style={btnTouch}
+          <MyBtn
             onPress={() => {
               if (!this.state.push) {
                 this.setState({push: true})
@@ -46,9 +67,7 @@ class TabFourScreen extends Component {
                 this.setState({push: false})
               }
             }}
-            >
-            <Text style={titleStyle}>Hide</Text>
-          </TouchableOpacity>
+          />
         </View>
       </View>
     )
@@ -62,7 +81,6 @@ TabFourScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
     backgroundColor: '#828282',
     width: w,
     alignItems: 'center',
@@ -72,20 +90,28 @@ const styles = StyleSheet.create({
   },
   gradientStyle: {
     width: w-200,
-    height: 300,
-    marginBottom: 100,
+    height: h*0.532,
   },
   gradientOff: {
     display: 'none',
   },
   btnBox: {
     width: w - 40,
-    paddingBottom: 25,
+    paddingBottom: h/24.8,
+    marginTop: h/10,
   },
-  btnTouch: {
+  btnTouchOn: {
     width: w - 40,
-    height: 35,
+    height: h/20.7,
     backgroundColor: '#27ae60',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  btnTouchOff: {
+    width: w - 40,
+    height: h/20.7,
+    backgroundColor: '#2d9cdb',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,

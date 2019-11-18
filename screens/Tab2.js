@@ -1,34 +1,54 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Button } from 'react-native';
-import { w } from '../constants';
+import { View, StyleSheet, Image, TouchableOpacity, Text, ProgressBarAndroid, ImageBackground } from 'react-native';
+import { w, h } from '../constants';
 import * as ImagePicker from 'expo-image-picker';
+import ProgressImage from '../src/ProgressImage';
+import ProgressBtn from '../src/ProgressBtn';
 
 
 class TabTwoScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: 'https://s3-alpha-sig.figma.com/img/e096/d20f/4fb60115d8a2aabb7b9777b69664276b?Expires=1574640000&Signature=WnaWyG9VayhmTWOm1508sYtUHZb3kje3V18a79Pw~XBQcqLY5NraGqtEOz9wtIhlBFQ6sU7zYYknBdQ4de08WHkx4GCjS5WKYVORlISQp6xVVhRJbLIesbHnlF2rSXkEGmRyVIHbPnMgsr3EQmr4smaPjmz9rjRGWr-rqzXdpobITbw~w4T~EIkR3BkBP2Tz3IgZ4J95KJYsHiAeLHrGoqebRTL4yD4WvIGBIS8-qALafDeoJIUCPKoaB6HWugQpWo~j6srb~zCfoex8n5CNHA318--fZl8ThvUzlBiwmpMJykQNW6gxsU1qMIA4AqbH-LdTqWUl~a2HOTul8y2uLQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
+      image: null,
+      loadingStart: false,
+      loadingEnd: false
     }
   }
 
   render() {
-    const { container, btnBox, btn, imageStyle } = styles;
-    const { image } = this.state;
     
+    const { 
+      container, 
+      
+      imageContainer,
+      loadedImage
+    } = styles;
+    const { image, loadingStart, loadingEnd } = this.state;
+  
     return (
       <View style={container}>
-        <Image 
-          style={imageStyle}
-          source={{ uri: image }}
+        
+        
+        
+        <ProgressImage
+          thumbnailSource={require('../src/img/no_thumb.png')}
+          source={{uri: image}}
+          loadingStart={this.state.loadingStart}
+          onLoad={() => {
+            this.setState({loadingEnd: true})
+          }}
+        >
+          
+        </ProgressImage>       
+        
+
+        <ProgressBtn
+          loadingStart={loadingStart}
+          loadingEnd={loadingEnd}
+          press={this._getImage}
         />
-        <View style={btnBox}>
-          <Button
-            style={btn}
-            title='Upload Image'
-            onPress={this._getImage}
-          />
-        </View>
+        
       </View>
     )
   }
@@ -41,9 +61,8 @@ class TabTwoScreen extends Component {
       quality: 1
     });
 
-    console.log(result);
+    this.setState({image: result.uri, loadingStart: true})
 
-    this.setState({image: result.uri})
   };
 
 }
@@ -54,27 +73,30 @@ TabTwoScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
     backgroundColor: '#828282',
     width: w,
     alignItems: 'center',
+    justifyContent: 'flex-end',
     display: 'flex',
-    flex: 1
+    flex: 1,
   },
-  imageStyle: {
+  imageContainer: {
     width: w-100, 
-    height: 350,
-    borderRadius: 20,
+    height: h*0.6,
+    borderRadius: 15,
+    marginTop: h/50,
+    backgroundColor: '#c4c4c4',
+    justifyContent: 'center'
   },
-  btnBox: {
-    marginTop: 30,
-    width: w - 40,
-    paddingBottom: 20,
-  },
-  btn: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
+  loadedImage: {
+    width: w-100, 
+    height: h*0.6,
+    borderRadius: 15,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
   },
 });
 

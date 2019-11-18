@@ -19,8 +19,8 @@ const StackNavigator = createStackNavigator(
         },
         Auth: {
             screen: AuthScreen,
-            navigationOptions: ({navigation}) => ({
-                title: `${navigation.state.params.name}`,
+            navigationOptions: () => ({
+                title: 'Sign In',
                 headerStyle: {
                     backgroundColor: '#C4C4C4',
                 },
@@ -43,7 +43,7 @@ const StackNavigator = createStackNavigator(
 tabNavigator.navigationOptions = ({navigation}) => {
     const { routeName } = navigation.state.routes[navigation.state.index]
     let titleTab = '';
-    // console.log(navigation.state.params);
+    
     if (routeName == 'TabOneStack') {
         titleTab = 'Tab 1'
     } else if (routeName == 'TabTwoStack') {
