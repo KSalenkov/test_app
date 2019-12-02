@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { w } from '../constants';
+import { width } from '../constants/SizeScreen';
 
 class TabThreeScreen extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class TabThreeScreen extends Component {
     } else {
       this.setState({
         time: 900000,
-        pressBtn: false
+        pressBtn: false,
       });
     }
 
@@ -38,7 +38,7 @@ class TabThreeScreen extends Component {
 
     let timeInterval = setInterval(timeUpdate, 1000);
   }
-  
+
   render() {
     const { container, btnBox, btnTouch, timeStyle } = styles;
     
@@ -66,8 +66,7 @@ class TabThreeScreen extends Component {
             'Set Time'
           )
       }
-      
-      
+            
     }
 
     return (
@@ -80,14 +79,11 @@ class TabThreeScreen extends Component {
             <Text style={timeStyle}>{timeVisible(time, this.state.pressBtn)}</Text>
           </TouchableOpacity>
         </View>
-        
       </View>
     )
   }
   
 }
-
-
 
 TabThreeScreen.navigationOptions = {
   header: null,
@@ -97,16 +93,17 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 70,
     backgroundColor: '#828282',
-    width: w,
+    width: width,
     alignItems: 'center',
     display: 'flex',
     flex: 1
   },
   btnBox: {
-    width: w - 40,
+    width: width - 40,
+    marginBottom: 60,
   },
   btnTouch: {
-    width: w - 40,
+    width: width - 40,
     height: 40,
     backgroundColor: '#5e97d9',
     justifyContent: 'center',

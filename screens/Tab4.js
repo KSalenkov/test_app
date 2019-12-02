@@ -1,13 +1,53 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { w, h } from '../constants';
+import { width, height } from '../constants/SizeScreen';
 import { LinearGradient } from 'expo-linear-gradient';
+import Animation from '../components/Animation'
 
 class TabFourScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       push: false,
+      grad: -1,
+      upOrDown: 'up'
+    }
+  }
+
+  gradAnimation = () => {
+    
+    let jey = () => {
+      let { grad, upOrDown, push } = this.state;
+      if(!push) {
+        clearInterval(idInterval)
+      }
+      if (grad>0.8) {
+        this.setState({upOrDown: 'down'})
+      } else if (grad<(-0.8)) {
+        this.setState({upOrDown: 'up'})
+      }
+
+      
+      
+      this.setState({
+        grad: Animation(grad, upOrDown),
+      })
+    }
+
+    const idInterval = setInterval(jey,300) 
+  }
+
+  _onPress = () => {    
+    
+    if (!this.state.push) {
+      this.setState({push: true})
+      this.gradAnimation();
+    } else {
+      this.setState({
+        push: false,
+        grad: -1
+      })
+      
     }
   }
 
@@ -18,8 +58,9 @@ class TabFourScreen extends Component {
       if (this.state.push) {
         return (
           <LinearGradient
-            colors={['#eb231c', '#52b375']}
+            colors={['#eb231c', '#197907']}
             style={gradientStyle}
+            start={[0, this.state.grad]}
           />
         )
       } else {
@@ -60,13 +101,7 @@ class TabFourScreen extends Component {
 
         <View style={btnBox}>
           <MyBtn
-            onPress={() => {
-              if (!this.state.push) {
-                this.setState({push: true})
-              } else {
-                this.setState({push: false})
-              }
-            }}
+            onPress={this._onPress}
           />
         </View>
       </View>
@@ -82,35 +117,35 @@ TabFourScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#828282',
-    width: w,
+    width: width,
     alignItems: 'center',
     display: 'flex',
     justifyContent: 'flex-end',
     flex: 1,
   },
   gradientStyle: {
-    width: w-200,
-    height: h*0.532,
+    width: width-200,
+    height: height*0.532,
   },
   gradientOff: {
     display: 'none',
   },
   btnBox: {
-    width: w - 40,
-    paddingBottom: h/24.8,
-    marginTop: h/10,
+    width: width - 40,
+    paddingBottom: height/24.8,
+    marginTop: height/10,
   },
   btnTouchOn: {
-    width: w - 40,
-    height: h/20.7,
+    width: width - 40,
+    height: height/20.7,
     backgroundColor: '#27ae60',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
   },
   btnTouchOff: {
-    width: w - 40,
-    height: h/20.7,
+    width: width - 40,
+    height: height/20.7,
     backgroundColor: '#2d9cdb',
     justifyContent: 'center',
     alignItems: 'center',

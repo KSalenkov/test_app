@@ -6,7 +6,7 @@ import {
   Picker,
   AsyncStorage,
 } from 'react-native';
-import { w } from '../constants';
+import { width } from '../constants/SizeScreen';
 
 
 class TabOneScreen extends Component {
@@ -61,7 +61,7 @@ class TabOneScreen extends Component {
 const styles = StyleSheet.create({
   container: {
       backgroundColor: '#828282',
-      width: w,
+      width: width,
       alignItems: 'center',
       display: 'flex',
       flex: 1
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   picker: {
     height: 40,
-    width: w-40,
+    width: width-40,
     backgroundColor: '#fff',
     borderRadius: 50,
   },

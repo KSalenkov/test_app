@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, TouchableOpacity, Text, ProgressBarAndroid, ImageBackground } from 'react-native';
-import { w, h } from '../constants';
+import { width, height } from '../constants/SizeScreen';
 import * as ImagePicker from 'expo-image-picker';
-import ProgressImage from '../src/ProgressImage';
-import ProgressBtn from '../src/ProgressBtn';
+import ProgressImage from '../components/ProgressImage';
+import ProgressBtn from '../components/ProgressBtn';
 
 
 class TabTwoScreen extends Component {
@@ -15,24 +15,20 @@ class TabTwoScreen extends Component {
       loadingEnd: false
     }
   }
+  
 
   render() {
     
     const { 
-      container, 
-      
-      imageContainer,
-      loadedImage
+      container,
     } = styles;
     const { image, loadingStart, loadingEnd } = this.state;
   
     return (
       <View style={container}>
         
-        
-        
         <ProgressImage
-          thumbnailSource={require('../src/img/no_thumb.png')}
+          thumbnailSource={require('../assets/images/no_thumb.png')}
           source={{uri: image}}
           loadingStart={this.state.loadingStart}
           onLoad={() => {
@@ -74,23 +70,23 @@ TabTwoScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#828282',
-    width: w,
+    width: width,
     alignItems: 'center',
     justifyContent: 'flex-end',
     display: 'flex',
     flex: 1,
   },
   imageContainer: {
-    width: w-100, 
-    height: h*0.6,
+    width: width-100, 
+    height: height*0.6,
     borderRadius: 15,
-    marginTop: h/50,
+    marginTop: height/50,
     backgroundColor: '#c4c4c4',
     justifyContent: 'center'
   },
   loadedImage: {
-    width: w-100, 
-    height: h*0.6,
+    width: width-100, 
+    height: height*0.6,
     borderRadius: 15,
     position: 'absolute',
     top: 0,

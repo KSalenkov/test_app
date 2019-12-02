@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { View, ImageBackground, Button, StyleSheet } from 'react-native';
-import { h, w } from '../constants';
+import { width, height } from '../constants/SizeScreen';
 
 
 class StartScreen extends Component {
-    constructor(props) {
-        super(props);
-        this.params = {
-            name: 'Sign In',
-        }
-    }
-    
-    
     
     render() {
         const { container, image, btnBox, btn } = styles;
@@ -19,7 +11,7 @@ class StartScreen extends Component {
             <View style={container}>
                 <ImageBackground
                     style={image}
-                    source={require('../src/img/image.png')}
+                    source={require('../assets/images/image.png')}
                     imageStyle={{opacity:0.5}}
                 >
                     <View style={btnBox}>
@@ -27,16 +19,9 @@ class StartScreen extends Component {
                             style={btn}
                             color="#EB5757"
                             title='Start'
-                            onPress={() => this.props.navigation.navigate('Auth', this.params)}
+                            onPress={() => this.props.navigation.navigate('Auth')}
                         />
-
-                        {/* <BtnDown title='Start' onPress={() => this.props.navigation.navigate('auth')} /> */}
-
-
                     </View>
-                    
-                    
-                    
                 </ImageBackground>
                 
             </View>
@@ -45,25 +30,21 @@ class StartScreen extends Component {
 
 }
 
-
-
-
-
 const styles = StyleSheet.create({
     container: {
-        height: h,
-        width: w,    
+        height: height,
+        width: width,    
     },
     image: {
         flex: 1,
-        height: h,
-        width: w,
+        height: height,
+        width: width,
         backgroundColor:'transparent',
         justifyContent: 'flex-end',
         alignItems: 'center',        
     },
     btnBox: {
-        width: w - 40,
+        width: width - 40,
         paddingBottom: 20,
     },
     btn: {
@@ -72,6 +53,5 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
 })
-    
 
 export default StartScreen;

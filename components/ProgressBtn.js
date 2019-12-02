@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { w, h } from '../constants'
+import { width, height } from '../constants/SizeScreen'
 
 
 class ProgressBtn extends Component {
@@ -56,14 +56,14 @@ class ProgressBtn extends Component {
 
 const styles = StyleSheet.create({
     btnBox: {
-        marginTop: h/31,
-        width: w - 40,
-        height: h/15,
-        marginBottom: h/31,
+        marginTop: height/31,
+        width: width - 40,
+        height: height/15,
+        marginBottom: height/31,
     },
     btn: {
-        width: w - 40,
-        height: h/15,
+        width: width - 40,
+        height: height/15,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ImageBackground, Image, ProgressBarAndroid, StyleSheet } from 'react-native';
-import { w, h } from '../constants'
+import { width, height } from '../constants/SizeScreen'
 
 
 class ProgressImage extends Component {
@@ -52,16 +52,16 @@ class ProgressImage extends Component {
 
 const styles = StyleSheet.create({
     imageContainer: {
-        width: w-100, 
-        height: h*0.6,
+        width: width-100, 
+        height: height*0.6,
         borderRadius: 27,
-        marginTop: h/50,
+        marginTop: height/50,
         backgroundColor: '#c4c4c4',
         justifyContent: 'center'
       },
       backgroundImage: {
-        width: w-100,
-        height: h*0.6,
+        width: width-100,
+        height: height*0.6,
         borderRadius: 27,
         position: 'absolute',
         top: 0,
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
         left: 0,
       },
       loadedImage: {
-        width: w-100, 
-        height: h*0.6,
+        width: width-100, 
+        height: height*0.6,
         borderRadius: 27,
         position: 'absolute',
         top: 0,

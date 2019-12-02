@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
-import { w } from '../constants';
+import { width } from '../constants/SizeScreen';
 
 import tabNavigator from './MainTabNavigator';
 import StartScreen from '../screens/StartScreen';
@@ -10,7 +10,6 @@ import AuthScreen from '../screens/AuthScreen';
 const StackNavigator = createStackNavigator(
     
     {
-        
         Start: {
             screen: StartScreen,
             navigationOptions: () => ({
@@ -25,7 +24,7 @@ const StackNavigator = createStackNavigator(
                     backgroundColor: '#C4C4C4',
                 },
                 headerTitleStyle: {
-                    width: w-145,
+                    width: width-145,
                     textAlign: 'center',
                 }
             }),
@@ -59,7 +58,7 @@ tabNavigator.navigationOptions = ({navigation}) => {
             backgroundColor: '#C4C4C4',
         },
         headerTitleStyle: {
-            width: w-145,
+            width: width-145,
             textAlign: 'center',
         }
     }

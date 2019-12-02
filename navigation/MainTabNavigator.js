@@ -7,7 +7,7 @@ import TabTwoScreen from '../screens/Tab2';
 import TabThreeScreen from '../screens/Tab3';
 import TabFourScreen from '../screens/Tab4';
 
-import { w } from '../constants'
+import { width } from '../constants/SizeScreen'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   tabs: {
     backgroundColor: "#C4C4C4",
     height: 60,
-    width: w / 4,
+    width: width / 4,
     marginBottom: -27,
     paddingBottom: 27,
     borderColor: '#4F4F4F',
