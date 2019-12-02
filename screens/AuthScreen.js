@@ -4,10 +4,11 @@ import {
     TextInput, 
     KeyboardAvoidingView, 
     Button, 
-    StyleSheet, 
-    AsyncStorage 
+    StyleSheet,
 } from 'react-native';
 import { width } from '../constants/SizeScreen';
+import { connect } from 'react-redux';
+import { EnterLogin } from '../actions/action';
 
 
 
@@ -21,6 +22,8 @@ class AuthScreen extends Component {
             login: '',
         };
     };
+
+    
     
     saveLogin = (text) => {
         this.setState({login: text});
@@ -40,9 +43,7 @@ class AuthScreen extends Component {
                 inputItem, 
                 btnBox, 
                 btn, 
-            } = styles;
-
-        
+            } = styles;        
 
         return (
             <KeyboardAvoidingView style={container} behavior="position" enabled>           
@@ -50,13 +51,14 @@ class AuthScreen extends Component {
                     <TextInput
                         style={inputItem}                    
                         placeholder='Login'
-                        onChangeText={login => this.saveLogin(login)}
+                        value={this.state.login}
+                        onChangeText={this.saveLogin}
                     />
                     <TextInput                       
                         style={inputItem}
                         placeholder='Password'
                         secureTextEntry={true}
-                        onChangeText={pass => this.checkPass(pass)}
+                        onChangeText={this.checkPass}
                     />
                 </View>
                 <View style={btnBox}>
@@ -71,17 +73,11 @@ class AuthScreen extends Component {
         )
     }
 
-    saveValueFunction = () => {
-        if (this.state.login) {
-            AsyncStorage.setItem('login', this.state.login);
-        }
-    };
-
     checkPassAndGo = () => {
         if (this.state.passTrue) {
+            this.props.EnterLogin(this.state.login);
+            this.setState({login: ''})
             this.props.navigation.navigate('Tabs');
-            this.saveValueFunction();
-            
         } else {
             alert('Неправильный пароль')
         };
@@ -120,6 +116,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 5,
     },
-})   
+})
 
-export default AuthScreen;
+const mapStateToProps = state => {
+    return {
+        login: state.auth.login
+    }
+}
+
+export default connect(mapStateToProps, { EnterLogin })(AuthScreen);

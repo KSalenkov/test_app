@@ -4,9 +4,9 @@ import {
   Text,
   View,
   Picker,
-  AsyncStorage,
 } from 'react-native';
 import { width } from '../constants/SizeScreen';
+import { connect } from 'react-redux';
 
 
 class TabOneScreen extends Component {
@@ -16,28 +16,15 @@ class TabOneScreen extends Component {
       forPicker: {},
       login: '',
     } 
-  }
-  
-  
+  }  
 
   render() {
     const { container, hello, picker } = styles;
-    
-    const getValueFunction = () => {
-        
-      AsyncStorage.getItem('login').then(value =>
-        
-        this.setState({ login: value })
-        
-      );
-    };
-
-    getValueFunction();
 
     return (
       <View style={container}>
         <Text style={hello}>
-          Привет, {this.state.login}!
+          Привет, {this.props.login}!
         </Text>
         <Picker
           style={picker}
@@ -82,7 +69,12 @@ const styles = StyleSheet.create({
 
 TabOneScreen.navigationOptions = {
     header: null,
+}
+
+const mapStateToProps = state => {
+  return {
+      login: state.auth.login
   }
+}
 
-
-export default TabOneScreen;
+export default connect(mapStateToProps) (TabOneScreen);
